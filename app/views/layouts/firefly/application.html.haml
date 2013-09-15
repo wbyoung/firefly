@@ -1,0 +1,9 @@
+!!!
+%html
+  %head
+    %title Firefly
+    = stylesheet_link_tag    "firefly/application", media: "all"
+    = javascript_include_tag "firefly/application"
+    = csrf_meta_tags
+  %body
+    = yield
