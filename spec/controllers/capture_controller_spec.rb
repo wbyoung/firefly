@@ -16,6 +16,12 @@ describe Firefly::CaptureController do
       expect(Firefly::Event.count).to eq(2)
     end
 
+    it 'records events with the same name/category when posted multiple times' do
+      post :create, acceptable_params
+      post :create, acceptable_params
+      expect(Firefly::Event.count).to eq(4)
+    end
+
     it 'requires client id' do
       params = acceptable_params
       params.delete(:client_identifier)

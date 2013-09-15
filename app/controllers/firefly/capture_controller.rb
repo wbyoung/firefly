@@ -15,7 +15,7 @@ module Firefly
 
     def _find_or_create_from_events(model, name_key)
       names = params.require(:events).map { |event| event[name_key] }.select { |name| name }
-      result = model.where(name: names).inject({}) { |h, v| h[v.name] = v }
+      result = model.where(name: names).inject({}) { |h, v| h[v.name] = v; h }
       names.each do |name| # ensure all exist
         result[name] = model.find_or_create_by(name: name) unless result[name]
       end
