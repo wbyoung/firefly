@@ -1,3 +1,7 @@
 Firefly::Engine.routes.draw do
-  post '/capture', to: 'capture#create'
+  namespace 'api' do
+    namespace 'v1' do
+      post '/capture', to: 'capture#create'
+    end
+  end
 end
