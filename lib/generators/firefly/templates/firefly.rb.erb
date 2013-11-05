@@ -1,0 +1,16 @@
+Firefly.setup do |config|
+
+  # == User Authentication
+  #
+  # Firefly will call authentication method in a before filter for protected
+  # actions to ensure that there is a currently logged in user. If required,
+  # you should change this method to ensure the user has permissions to view
+  # statistical content.
+  config.authentication_method = :authenticate_<%= @underscored_user_name %>!
+
+  # == Current User
+  #
+  # Firefly will use this to get information on the currently logged in user.
+  config.current_user_method = :current_<%= @underscored_user_name %>
+
+end
