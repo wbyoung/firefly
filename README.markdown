@@ -17,4 +17,4 @@ Instructions coming soon&hellip;
 
 ## License
 
-Firefly is distributed under the MIT-LICENSE.
+Firefly is distributed under the MIT license.
