@@ -34,6 +34,14 @@ describe Firefly::CaptureController do
       expect { post :create, params }.to raise_error(ActionController::ParameterMissing)
     end
 
+    it 'accepts bundle id via environment variable' do
+      Firefly::FIREFLY_DEFAULT_BUNDLE_ID = 'com.fadingred.firefly'
+      params = acceptable_params
+      params.delete(:bundle_identifier)
+      expect { post :create, params }.not_to raise_error
+      Firefly.send(:remove_const, :FIREFLY_DEFAULT_BUNDLE_ID)
+    end
+
     it 'requires events' do
       params = acceptable_params
       params.delete(:events)

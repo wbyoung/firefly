@@ -24,7 +24,12 @@ module Firefly
 
     def _create
       result = {}
-      bundle = Bundle.find_or_create_by(name: params.require(:bundle_identifier))
+      bundle_identifier = params[:bundle_identifier]
+      if !bundle_identifier && Firefly.const_defined?(:FIREFLY_DEFAULT_BUNDLE_ID)
+        bundle_identifier = Firefly::FIREFLY_DEFAULT_BUNDLE_ID
+      end
+      raise ActionController::ParameterMissing.new('param not found: bundle_identifier') unless bundle_identifier
+      bundle = Bundle.find_or_create_by(name: bundle_identifier)
       client = Client.find_or_create_by(name: params.require(:client_identifier))
       kinds = _find_or_create_from_events Kind, 'name'
       categories = _find_or_create_from_events Category, 'category'
